@@ -162,18 +162,26 @@ public class Ablak extends javax.swing.JFrame {
 try{
 String valasztottSzak=jSzakok.getSelectedItem().toString();
 boolean hirleveletkert=jHirlevel.isSelected();
+String ures="üres";
 String kert="Kért hírlevelet";
 String nemkert="Nem kért hírlevelet";
-        if (jHirlevel.isSelected()==true) {
+    if (valasztottSzak.equals("Szoftverfejlesztő") || jSzakok.getSelectedItem().equals("Rendszerüzemeltető") || jSzakok.getSelectedItem().equals("Grafikus")) {
+        Files.write(Paths.get("mentes.txt"),valasztottSzak.getBytes());
+    }else{
+        System.out.println("Válassz szakot!");
+    } if (jHirlevel.isSelected()==true) {
             System.out.println(kert);
         }else{
             System.out.println(nemkert);
         }
-         Files.write(Paths.get("mentes.txt"),valasztottSzak.getBytes());
+    Files.write(Paths.get("mentes.txt"),ures.getBytes());
+//         Files.write(Paths.get("mentes.txt"),valasztottSzak.getBytes());
 }
 catch(IOException ex){
 
     }
+
+
 //
 //try{
 //       String hirleveletkert=jHirlevel.getSelectedIcon().toString();
@@ -244,7 +252,7 @@ catch(IOException ex){
 //StringBuilder sb = new StringBuilder();
 //sb.append("Választott szak: " + jSzakok.getSelectedItem());
 //boolean hirlevel = jHirlevel.isSelected();
-//    if (hirlevel==true) {
+//    if (hirlevel==true && jSzakok.getSelectedItem().equals("Szoftverfejlesztő") || jSzakok.getSelectedItem().equals("Rendszerüzemeltető") || jSzakok.getSelectedItem().equals("Grafikus")) {
 //        sb.append("\nKért hírlevelet?"+"igen");
 //    }else{
 //            sb.append("\nKért hírlevelet?"+"nem");
