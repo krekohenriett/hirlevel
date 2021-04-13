@@ -5,6 +5,12 @@
  */
 package pkg0413_gui;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author User1
@@ -29,12 +35,12 @@ public class Ablak extends javax.swing.JFrame {
 
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jHirlevel = new javax.swing.JCheckBox();
+        jSzakok = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu3 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        jBeolvas = new javax.swing.JMenu();
+        jMentes = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
 
         jMenu1.setText("jMenu1");
@@ -45,27 +51,51 @@ public class Ablak extends javax.swing.JFrame {
         setTitle("Hírlevél");
         setName(""); // NOI18N
 
-        jCheckBox1.setText("Kérem a hírlevelet");
+        jHirlevel.setText("Kérem a hírlevelet");
+        jHirlevel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jHirlevelMouseClicked(evt);
+            }
+        });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Szakok", "Szoftverfejlesztő", "Rendszerüzemeltető", "Grafikus" }));
-        jComboBox1.setToolTipText("Szakok");
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        jSzakok.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Szakok", "Szoftverfejlesztő", "Rendszerüzemeltető", "Grafikus" }));
+        jSzakok.setToolTipText("Szakok");
+        jSzakok.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                jSzakokActionPerformed(evt);
             }
         });
 
         jLabel1.setText("Melyik szakról kér hírlevelet?");
 
-        jMenu3.setText("Menü");
+        jBeolvas.setText("Menü");
 
-        jMenuItem1.setText("Mentés(kiír)");
-        jMenu3.add(jMenuItem1);
+        jMentes.setText("Mentés(kiír)");
+        jMentes.addMenuKeyListener(new javax.swing.event.MenuKeyListener() {
+            public void menuKeyPressed(javax.swing.event.MenuKeyEvent evt) {
+                jMentesMenuKeyPressed(evt);
+            }
+            public void menuKeyReleased(javax.swing.event.MenuKeyEvent evt) {
+            }
+            public void menuKeyTyped(javax.swing.event.MenuKeyEvent evt) {
+            }
+        });
+        jMentes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMentesMouseClicked(evt);
+            }
+        });
+        jMentes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMentesActionPerformed(evt);
+            }
+        });
+        jBeolvas.add(jMentes);
 
         jMenuItem2.setText("Beolvas");
-        jMenu3.add(jMenuItem2);
+        jBeolvas.add(jMenuItem2);
 
-        jMenuBar1.add(jMenu3);
+        jMenuBar1.add(jBeolvas);
 
         setJMenuBar(jMenuBar1);
 
@@ -75,11 +105,11 @@ public class Ablak extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jCheckBox1)
+                .addComponent(jHirlevel)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jSzakok, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addGap(0, 222, Short.MAX_VALUE))
         );
@@ -89,18 +119,80 @@ public class Ablak extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addGap(9, 9, 9)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jSzakok, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
-                .addComponent(jCheckBox1)
+                .addComponent(jHirlevel)
                 .addGap(18, 18, 18))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void jSzakokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSzakokActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+        System.out.println("kattintott");
+
+    }//GEN-LAST:event_jSzakokActionPerformed
+
+    private void jMentesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMentesMouseClicked
+        // TODO add your handling code here:
+        System.out.println("mentett");
+    }//GEN-LAST:event_jMentesMouseClicked
+
+    private void jHirlevelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jHirlevelMouseClicked
+        // TODO add your handling code here:
+        System.out.println("kért");
+    }//GEN-LAST:event_jHirlevelMouseClicked
+
+    private void jMentesMenuKeyPressed(javax.swing.event.MenuKeyEvent evt) {//GEN-FIRST:event_jMentesMenuKeyPressed
+        // TODO add your handling code here:
+                System.out.println("mentett");
+
+    }//GEN-LAST:event_jMentesMenuKeyPressed
+
+    private void jMentesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMentesActionPerformed
+     
+//       try{
+//       Ment();
+//           JOptionPane.showMessageDialog(this, "Sikeres mentés");
+//       }catch(IOException ex){
+//                  JOptionPane.showMessageDialog(this, "Hiba");
+//
+//       }
+try{
+String valasztottSzak=jSzakok.getSelectedItem().toString();
+boolean hirleveletkert=jHirlevel.isSelected();
+String kert="Kért hírlevelet";
+String nemkert="Nem kért hírlevelet";
+        if (jHirlevel.isSelected()==true) {
+            System.out.println(kert);
+        }else{
+            System.out.println(nemkert);
+        }
+         Files.write(Paths.get("mentes.txt"),valasztottSzak.getBytes());
+}
+catch(IOException ex){
+
+    }
+//
+//try{
+//       String hirleveletkert=jHirlevel.getSelectedIcon().toString();
+//
+//
+//        if (jHirlevel.isSelected()==true) {
+//            System.out.println("Kért hírlevelet");
+//        }else{
+//            System.out.println("Nem kért hírlevelet");
+//        }
+//         Files.write(Paths.get("mentes.txt"),hirleveletkert.getBytes());
+//}
+//catch(IOException ex){
+//
+//    }
+
+
+      
+    }//GEN-LAST:event_jMentesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -138,14 +230,28 @@ public class Ablak extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JMenu jBeolvas;
+    private javax.swing.JCheckBox jHirlevel;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JMenuItem jMentes;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JComboBox<String> jSzakok;
     // End of variables declaration//GEN-END:variables
+//private void Ment() throws IOException{
+//StringBuilder sb = new StringBuilder();
+//sb.append("Választott szak: " + jSzakok.getSelectedItem());
+//boolean hirlevel = jHirlevel.isSelected();
+//    if (hirlevel==true) {
+//        sb.append("\nKért hírlevelet?"+"igen");
+//    }else{
+//            sb.append("\nKért hírlevelet?"+"nem");
+//
+//    }
+//Files.write(Paths.get("mentes.txt"), sb.toString().getBytes());
+//
+//        }
+
 }
